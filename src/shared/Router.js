@@ -1,4 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom'
 
 import HomePage from '../pages/HomePage'
 import SignupPage from '../pages/SignupPage'
@@ -8,15 +13,24 @@ import NotFoundPage from '../pages/NotFoundPage'
 
 export default function Router() {
   const access_token = localStorage.getItem('access_token')
-
+  console.log(access_token)
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/signup' element={access_token ? <TodoPage /> : <SignupPage />} />
-        <Route path='/signin' element={access_token ? <TodoPage /> : <SigninPage />} />
-        <Route path='/todo' element={access_token ? <TodoPage /> : <SigninPage />} />
-        <Route path='/*' element={<NotFoundPage />} />
+        <Route
+          path='/signup'
+          element={
+            access_token ? (
+              <Navigate to='/todo' replace={true} />
+            ) : (
+              <SignupPage />
+            )
+          }
+        />
+        <Route path='/signin' element={<SigninPage />} />
+        <Route path='/todo' element={<TodoPage />} />
+        <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   )

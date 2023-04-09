@@ -19,7 +19,7 @@ export default function SigninPage() {
         email,
         password,
       })
-      localStorage.setItem(response.data.access_token, 'access_token')
+      localStorage.setItem('access_token', response.data.access_token)
       setToken(response.data.access_token)
       navigate('/todo')
     } catch (error) {
