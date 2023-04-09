@@ -1,3 +1,18 @@
 export default function TodoPage() {
-  return <div>투두</div>
+  return (
+    <ol>
+      <li>
+        <label>
+          <input type='checkbox' />
+          <span>TODO 1</span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type='checkbox' />
+          <span>TODO 2</span>
+        </label>
+      </li>
+    </ol>
+  )
 }
