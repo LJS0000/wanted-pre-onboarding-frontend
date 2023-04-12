@@ -16,8 +16,7 @@ import NotFoundPage from '../pages/NotFoundPage'
 
 export default function Router() {
   const isLog = useContext(AuthContext)
-  console.log(isLog)
-
+  // console.log(isLog)
   return (
     <BrowserRouter>
       <Routes>
