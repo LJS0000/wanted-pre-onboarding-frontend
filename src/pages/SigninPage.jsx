@@ -1,13 +1,11 @@
-import { useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../App'
 import axios from '../axios/axios'
+import jwt_decode from 'jwt-decode'
 import AuthForm from '../components/auth/AuthForm'
 import setToken from '../axios/setToken'
 
 export default function SigninPage() {
-  const navigate = useNavigate()
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
@@ -21,14 +19,20 @@ export default function SigninPage() {
         email,
         password,
       })
-      localStorage.setItem('access_token', response.data.access_token)
-      setToken(response.data.access_token)
+      const access_token = response.data.access_token
+      decodeJWT(access_token)
+      localStorage.setItem('access_token', access_token)
+      setToken(access_token)
       setIsLog(true)
     } catch (error) {
       console.log(error)
       setErrorMessage('아이디, 비밀번호를 다시 한 번 확인해 주세요.')
     }
-    navigate('/todo')
+  }
+
+  const decodeJWT = access_token => {
+    const decoded = jwt_decode(access_token)
+    console.log(decoded)
   }
 
   return (
