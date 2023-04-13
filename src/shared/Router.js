@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 
 import { useContext } from 'react'
-import AuthContext from '../App'
+import { AuthContext } from '../App'
 
 import HomePage from '../pages/HomePage'
 import SignupPage from '../pages/SignupPage'
@@ -15,8 +15,8 @@ import TodoPage from '../pages/TodoPage'
 import NotFoundPage from '../pages/NotFoundPage'
 
 export default function Router() {
-  const isLog = useContext(AuthContext)
-  // console.log(isLog)
+  const { isLog } = useContext(AuthContext)
+  console.log(isLog)
   return (
     <BrowserRouter>
       <Routes>

@@ -1,20 +1,17 @@
 import { createContext, useState } from 'react'
 import Router from './shared/Router'
 
-const AuthContext = createContext()
+export const AuthContext = createContext({
+  isLog: false,
+  setIsLog: () => {},
+})
+
 function App() {
   const access_token = localStorage.getItem('access_token')
-
-  const [isLog, setIsLog] = useState(false)
-
-  if (access_token) {
-    setIsLog(true)
-  } else {
-    setIsLog(false)
-  }
+  const [isLog, setIsLog] = useState(!!access_token)
 
   return (
-    <AuthContext.Provider value={isLog}>
+    <AuthContext.Provider value={{ isLog, setIsLog }}>
       <Router />
     </AuthContext.Provider>
   )
