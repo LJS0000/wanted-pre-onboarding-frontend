@@ -1,18 +1,11 @@
+import TodoInput from '../components/todo/TodoInput'
+import TodoList from '../components/todo/TodoList'
+
 export default function TodoPage() {
   return (
-    <ol>
-      <li>
-        <label>
-          <input type='checkbox' />
-          <span>TODO 1</span>
-        </label>
-      </li>
-      <li>
-        <label>
-          <input type='checkbox' />
-          <span>TODO 2</span>
-        </label>
-      </li>
-    </ol>
+    <div>
+      <TodoInput />
+      <TodoList />
+    </div>
   )
 }
