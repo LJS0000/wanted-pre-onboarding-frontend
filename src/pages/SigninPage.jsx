@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { AuthContext } from '../App'
 import axios from '../axios/axios'
 import AuthForm from '../components/auth/AuthForm'
 import setToken from '../axios/setToken'
@@ -10,6 +11,7 @@ export default function SigninPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
+  const { setIsLog } = useContext(AuthContext)
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -21,11 +23,12 @@ export default function SigninPage() {
       })
       localStorage.setItem('access_token', response.data.access_token)
       setToken(response.data.access_token)
-      navigate('/todo')
+      setIsLog(true)
     } catch (error) {
       console.log(error)
       setErrorMessage('아이디, 비밀번호를 다시 한 번 확인해 주세요.')
     }
+    navigate('/todo')
   }
 
   return (
