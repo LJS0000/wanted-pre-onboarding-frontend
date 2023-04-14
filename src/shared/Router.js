@@ -9,7 +9,6 @@ import { useContext } from 'react'
 import { AuthContext } from '../App'
 import setToken from '../axios/setToken'
 
-import HomePage from '../pages/HomePage'
 import SignupPage from '../pages/SignupPage'
 import SigninPage from '../pages/SigninPage'
 import TodoPage from '../pages/TodoPage'
@@ -25,7 +24,7 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<HomePage />} />
+        <Route path='/' element={<Navigate replace to='/todo' />} />
         <Route
           path='/signup'
           element={isLog ? <Navigate to='/todo' /> : <SignupPage />}
