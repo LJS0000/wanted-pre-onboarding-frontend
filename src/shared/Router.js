@@ -7,6 +7,7 @@ import {
 
 import { useContext } from 'react'
 import { AuthContext } from '../App'
+import setToken from '../axios/setToken'
 
 import HomePage from '../pages/HomePage'
 import SignupPage from '../pages/SignupPage'
@@ -16,7 +17,11 @@ import NotFoundPage from '../pages/NotFoundPage'
 
 export default function Router() {
   const { isLog } = useContext(AuthContext)
-  console.log(isLog)
+
+  if (isLog) {
+    setToken(localStorage.getItem('access_token'))
+  }
+
   return (
     <BrowserRouter>
       <Routes>

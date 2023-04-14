@@ -6,6 +6,7 @@ export default function TodoList() {
 
   useEffect(() => {
     const response = axios.get('/todos')
+    console.log(response)
     setList(response)
   }, [])
 
