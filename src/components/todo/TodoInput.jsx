@@ -2,16 +2,10 @@ import { useState } from 'react'
 import axios from '../../axios/axios'
 
 export default function TodoInput() {
-  const hexString = Math.floor(Math.random() * 0xffffffff).toString(
-    16,
-  )
-  const randomString = ('00000000' + hexString).slice(-8)
   const timestamp = new Date().getTime()
-  const uniqueId = `${randomString}-${timestamp}`
-  console.log(uniqueId)
 
   const [todo, setTodo] = useState({
-    id: uniqueId,
+    id: timestamp,
     todo: '과제하기',
     isCompleted: false,
     userId: localStorage.getItem('userId'),
