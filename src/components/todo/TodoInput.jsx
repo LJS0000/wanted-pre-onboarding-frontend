@@ -4,12 +4,14 @@ import axios from '../../axios/axios'
 export default function TodoInput() {
   const timestamp = new Date().getTime()
 
-  const [todo, setTodo] = useState({
+  const [text, setText] = useState('')
+
+  const todo = {
     id: timestamp,
-    todo: '과제하기',
+    todo: text,
     isCompleted: false,
     userId: localStorage.getItem('userId'),
-  })
+  }
 
   const createTodo = async e => {
     e.preventDefault()
@@ -22,10 +24,10 @@ export default function TodoInput() {
   }
 
   return (
-    <form>
+    <form onSubmit={createTodo}>
       <input
         data-testid='new-todo-input'
-        onChange={e => createTodo(e.target.value)}
+        onChange={e => setText(e.target.value)}
       />
       <button data-testid='new-todo-add-button'>추가</button>
     </form>
