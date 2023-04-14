@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
 import { AuthContext } from '../App'
 import axios from '../axios/axios'
-import jwt_decode from 'jwt-decode'
 import AuthForm from '../components/auth/AuthForm'
 
 export default function SigninPage() {
@@ -19,18 +18,13 @@ export default function SigninPage() {
         password,
       })
       const access_token = response.data.access_token
-      decodeJWT(access_token)
+
       localStorage.setItem('access_token', access_token)
       setIsLog(true)
     } catch (error) {
       console.log(error)
       setErrorMessage('아이디, 비밀번호를 다시 한 번 확인해 주세요.')
     }
-  }
-
-  const decodeJWT = access_token => {
-    const { sub } = jwt_decode(access_token)
-    localStorage.setItem('userId', sub)
   }
 
   return (
