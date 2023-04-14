@@ -1,15 +1,18 @@
-import { useState } from 'react'
-
-export default function TodoText({ updateTodo, list, toggle }) {
-  const [modify, setModify] = useState(list.todo)
-
+export default function TodoText({
+  updateTodo,
+  list,
+  toggle,
+  modify,
+  setModify,
+  updateDone,
+}) {
   return (
     <lable>
       <input
         type='checkbox'
         onChange={e => e.target.checked}
         checked={list.isCompleted}
-        onClick={() => updateTodo(list, modify)}
+        onClick={() => updateDone(list)}
       />
       {toggle ? (
         <span style={{ margin: ' 0 5px' }}>{list.todo}</span>
@@ -20,7 +23,6 @@ export default function TodoText({ updateTodo, list, toggle }) {
           onChange={e => {
             setModify(e.target.value)
           }}
-          onClick={() => updateTodo(list, modify)}
         />
       )}
     </lable>

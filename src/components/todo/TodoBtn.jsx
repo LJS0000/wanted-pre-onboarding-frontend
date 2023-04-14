@@ -1,12 +1,25 @@
 import { useState } from 'react'
 import TodoText from './TodoText'
 
-export default function TodoBtn({ updateTodo, list, deleteTodo }) {
+export default function TodoBtn({
+  updateTodo,
+  list,
+  deleteTodo,
+  updateDone,
+}) {
   const [toggle, setToggle] = useState(true)
+  const [modify, setModify] = useState(list.todo)
 
   return (
     <div style={{ display: 'flex' }}>
-      <TodoText updateTodo={updateTodo} list={list} toggle={toggle} />
+      <TodoText
+        updateDone={updateDone}
+        updateTodo={updateTodo}
+        list={list}
+        toggle={toggle}
+        modify={modify}
+        setModify={setModify}
+      />
       {toggle ? (
         <div>
           <button
@@ -24,7 +37,10 @@ export default function TodoBtn({ updateTodo, list, deleteTodo }) {
         <div>
           <button
             data-testid='submit-button'
-            onClick={() => setToggle(true)}>
+            onClick={() => {
+              setToggle(true)
+              updateTodo(list, modify)
+            }}>
             제출
           </button>
           <button data-testid='cancel-button'>취소</button>

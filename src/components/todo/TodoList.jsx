@@ -1,6 +1,11 @@
 import TodoBtn from './TodoBtn'
 
-export default function TodoList({ lists, updateTodo, deleteTodo }) {
+export default function TodoList({
+  lists,
+  updateTodo,
+  deleteTodo,
+  updateDone,
+}) {
   return (
     <ul>
       {lists?.map(list => {
@@ -10,6 +15,7 @@ export default function TodoList({ lists, updateTodo, deleteTodo }) {
               updateTodo={updateTodo}
               list={list}
               deleteTodo={deleteTodo}
+              updateDone={updateDone}
             />
           </li>
         )
