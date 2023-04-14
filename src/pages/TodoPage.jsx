@@ -25,12 +25,12 @@ export default function TodoPage() {
     e.target.reset()
   }
 
-  const updateTodo = async list => {
-    const { id, todo, isCompleted } = list
-    console.log(!isCompleted)
+  const updateTodo = async (list, modify) => {
+    const { id, isCompleted } = list
+
     try {
       await axios.put(`/todos/${id}`, {
-        todo: todo,
+        todo: modify,
         isCompleted: !isCompleted,
       })
       axios
@@ -44,8 +44,19 @@ export default function TodoPage() {
     }
   }
 
-  const deleteTodo = async e => {
-    e.preventDefault()
+  const deleteTodo = async list => {
+    const { id } = list
+    try {
+      await axios.delete(`/todos/${id}`)
+      axios
+        .get('/todos')
+        .then(response => {
+          setLists(response.data)
+        })
+        .catch(error => console.log(error))
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
