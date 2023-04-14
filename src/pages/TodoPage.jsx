@@ -25,6 +25,29 @@ export default function TodoPage() {
     e.target.reset()
   }
 
+  const updateTodo = async list => {
+    const { id, todo, isCompleted } = list
+    console.log(!isCompleted)
+    try {
+      await axios.put(`/todos/${id}`, {
+        todo: todo,
+        isCompleted: !isCompleted,
+      })
+      axios
+        .get('/todos')
+        .then(response => {
+          setLists(response.data)
+        })
+        .catch(error => console.log(error))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const deleteTodo = async e => {
+    e.preventDefault()
+  }
+
   useEffect(() => {
     axios
       .get('/todos')
@@ -37,7 +60,11 @@ export default function TodoPage() {
   return (
     <div>
       <TodoInput setTodo={setTodo} createTodo={createTodo} />
-      <TodoList lists={lists} />
+      <TodoList
+        lists={lists}
+        updateTodo={updateTodo}
+        deleteTodo={deleteTodo}
+      />
     </div>
   )
 }
